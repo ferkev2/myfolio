@@ -1,0 +1,43 @@
+{
+  "user": {
+    "firstname": "Kevin",
+    "lastname": "LE FRANC"
+  },
+  "experiences": [
+    {
+      "id": 1,
+      "company": "Radio France",
+      "description": "Maintain radio france websites",
+      "urlImage": "/assets/projects/radiofrance.png",
+      "stack": ["symfony", "nodejs", "react", "git"]
+    },
+    {
+      "id": 2,
+      "company": "Malakoff Mederic",
+      "description": "Work on front website for Arkea services",
+      "urlImage": null,
+      "stack": ["symfony", "nodejs", "angular", "git"]
+    },
+    {
+      "id": 3,
+      "company": "Agence France Presse",
+      "description": "Improvements for AFP news application",
+      "urlImage": "/assets/projects/afp.png",
+      "stack": ["java", "nodejs", "angular", "git", "aws"]
+    },
+    {
+      "id": 4,
+      "company": "Société Générale",
+      "description": "Creation of web apps for central services",
+      "urlImage": null,
+      "stack": ["nestjs", "react", "typescript", "docker"]
+    },
+    {
+      "id": 5,
+      "company": "MyTF1",
+      "description": "Work on the TF1 app on miami box",
+      "urlImage": "/assets/projects/tf1.png",
+      "stack": ["qt", "javascript", "git"]
+    }
+  ]
+}
