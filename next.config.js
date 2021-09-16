@@ -4,4 +4,5 @@ module.exports = {
   images: {
     domains: ['picsum.photos', 'daisyui.com', 'public.assets', 'www.w3.org'],
   },
+  target: serverless
 }
