@@ -16,19 +16,16 @@ interface IinputForm {
 }
 
 export const TextAreaForm: FC<IinputForm> = ({ id, label, name, value, placeholder, onChangeParent }) => {
-  const [inputvalue, setInputValue] = useState(value);
   const [textAreaClass, setTextAreaClass] = useState('textarea h-24 textarea-bordered');
   const [ errorMessage, setErrorMessage] = useState({ name: '', message: '' });
 
   const onHandleInput = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     const { name, value }  = e.target;
     checkError(e.target);
-    setInputValue(value);
     onChangeParent({ name, value });
   };
 
   const checkError = (values: Iform) => {
-    console.log('ok');
     if (!values.value && values.value === '') {
         setErrorMessage({
         name: values.name,
@@ -50,7 +47,7 @@ export const TextAreaForm: FC<IinputForm> = ({ id, label, name, value, placehold
         <span className="label-text">Your Message :</span>
       </label>
       <div className="flex flex-col self-end w-2/3">
-        <textarea value={inputvalue} onChange={onHandleInput} id={id} name={name} className={textAreaClass} placeholder={placeholder}></textarea>
+        <textarea value={value} onChange={onHandleInput} id={id} name={name} className={textAreaClass} placeholder={placeholder}></textarea>
         { errorMessage.name && errorMessage.message && <ErrorForm message={errorMessage.message} />}
       </div>
     </div>

@@ -16,14 +16,12 @@ interface IinputForm {
 }
 
 export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder, onChangeParent}) => {
-  const [inputvalue, setInputValue] = useState(value);
   const [inputClass, setInputClass] = useState('input input-bordered');
   const [ errorMessage, setErrorMessage] = useState({ name: '', message: '' });
 
   const onHandleInput = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     const { name, value }  = e.target;
     checkError(e.target);
-    setInputValue(value);
     onChangeParent({ name, value });
   };
 
@@ -50,7 +48,7 @@ export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder,
           <span className="label-text">{name} :</span>
         </label>
         <div className="flex flex-col w-2/3 self-end">
-          <input value={inputvalue} onChange={onHandleInput} type="text" id={id} name={name} placeholder={placeholder} className={inputClass} />
+          <input value={value} onChange={onHandleInput} type="text" id={id} name={name} placeholder={placeholder} className={inputClass} />
           { errorMessage.name && errorMessage.message && <ErrorForm message={errorMessage.message} />}
         </div>
       </div>

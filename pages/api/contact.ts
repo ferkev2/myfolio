@@ -8,7 +8,7 @@ dotenv.config();
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const { firstname, lastname, email, message, captcha } = req.body;
 
-  if (captcha) {
+  if (!captcha) {
      res.status(429).json('Too many request');
   }
 

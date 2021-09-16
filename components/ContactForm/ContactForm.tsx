@@ -1,8 +1,9 @@
-import React, { useState, useRef, SyntheticEvent } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import { InputForm } from '../InputForm/InputForm';
 import { TextAreaForm } from '../TextAreaForm/TextAreaForm';
+import { FormEvent } from 'react-google-recaptcha/node_modules/@types/react';
 interface Iform {
   name: string;
   value: string;
@@ -13,11 +14,13 @@ export const ContactForm = () => {
   const [ lastname, setLastname] = useState<string>('');
   const [ email, setEmail ] = useState<string>('');
   const [ message, setMessage ] = useState<string>('');
+  const [ isSubmitted, setIsSubmitted ] = useState<boolean>(false);
   const [ captcha, setCaptcha ] = useState<string|null|undefined>('');
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const onHandleParentInput = (values: Iform) => {
     const { name, value }  = values;
+    console.log(values.name);
     switch (name) {
       case 'firstname':
         setFirstname(value);
@@ -45,7 +48,9 @@ export const ContactForm = () => {
     }
   };
 
-  const onHandleSubmit = () => {
+  const onHandleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const messageToSend = {
       firstname,
       lastname,
@@ -54,13 +59,27 @@ export const ContactForm = () => {
       captcha
     };
 
-
     if (captcha && firstname && lastname && email) {
+      setIsSubmitted(true);
       axios.post('/api/contact', messageToSend).then((response) => {
-        console.log(response);
+        if (response) {
+          setIsSubmitted(true);
+          recaptchaRef?.current?.reset();
+        }
+        setIsSubmitted(false);
       });
     }
   };
+
+   useEffect(() => {
+    if (isSubmitted) {
+      setFirstname('');
+      setLastname('');
+      setEmail('');
+      setMessage('');
+      setCaptcha('');
+    }
+  }, [isSubmitted]);
 
 
   return (
