@@ -16,19 +16,29 @@ interface IinputForm {
   type?: string;
 }
 
-export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder, onChangeParent, type = 'text'}) => {
+export const InputForm: FC<IinputForm> = ({
+  id,
+  label,
+  name,
+  value,
+  placeholder,
+  onChangeParent,
+  type = 'text',
+}) => {
   const [inputClass, setInputClass] = useState('input input-bordered');
-  const [ errorMessage, setErrorMessage] = useState({ name: '', message: '' });
+  const [errorMessage, setErrorMessage] = useState({ name: '', message: '' });
 
-  const onHandleInput = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
-    const { name, value }  = e.target;
+  const onHandleInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
     checkError(e.target);
     onChangeParent({ name, value });
   };
 
   const checkError = (values: Iform) => {
     if (!values.value && values.value === '') {
-        setErrorMessage({
+      setErrorMessage({
         name: values.name,
         message: `${values.name} is empty`,
       });
@@ -36,7 +46,7 @@ export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder,
     } else {
       setErrorMessage({
         name: '',
-        message: ''
+        message: '',
       });
       setInputClass('input input-bordered');
     }
@@ -49,8 +59,19 @@ export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder,
           <span className="label-text">{name} :</span>
         </label>
         <div className="flex flex-col w-2/3 self-end">
-          <input value={value} onChange={onHandleInput} type={type} id={id} name={name} placeholder={placeholder} className={inputClass} required />
-          { errorMessage.name && errorMessage.message && <ErrorForm message={errorMessage.message} />}
+          <input
+            value={value}
+            onChange={onHandleInput}
+            type={type}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            className={inputClass}
+            required
+          />
+          {errorMessage.name && errorMessage.message && (
+            <ErrorForm message={errorMessage.message} />
+          )}
         </div>
       </div>
     </>

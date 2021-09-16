@@ -10,7 +10,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      { children }
+      {children}
       <Footer />
     </>
   );
