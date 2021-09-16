@@ -4,6 +4,7 @@ import axios from 'axios';
 import { InputForm } from '../InputForm/InputForm';
 import { TextAreaForm } from '../TextAreaForm/TextAreaForm';
 import { FormEvent } from 'react-google-recaptcha/node_modules/@types/react';
+import { Alert } from '../Alert/Alert';
 interface Iform {
   name: string;
   value: string;
@@ -16,11 +17,15 @@ export const ContactForm = () => {
   const [ message, setMessage ] = useState<string>('');
   const [ isSubmitted, setIsSubmitted ] = useState<boolean>(false);
   const [ captcha, setCaptcha ] = useState<string|null|undefined>('');
+  const [alertValue, setalertValue] = useState({
+    message: '',
+    type: '',
+  });
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const onHandleParentInput = (values: Iform) => {
     const { name, value }  = values;
-    console.log(values.name);
+
     switch (name) {
       case 'firstname':
         setFirstname(value);
@@ -60,12 +65,10 @@ export const ContactForm = () => {
     };
 
     if (captcha && firstname && lastname && email) {
-      setIsSubmitted(true);
-      axios.post('/api/contact', messageToSend).then((response) => {
-        if (response) {
-          setIsSubmitted(true);
-          recaptchaRef?.current?.reset();
-        }
+      axios.post('/api/contact', messageToSend).then((response: any) => {
+        setIsSubmitted(true);
+        setalertValue(response.data);
+        recaptchaRef?.current?.reset();
         setIsSubmitted(false);
       });
     }
@@ -84,6 +87,7 @@ export const ContactForm = () => {
 
   return (
     <>
+      { alertValue.type !== '' ? <Alert alertMessage={alertValue.message} alertType={alertValue.type} /> : null }
       <form className="mt-8 bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={onHandleSubmit}>
         <InputForm
           label='contact-firstname'
@@ -107,6 +111,7 @@ export const ContactForm = () => {
           id='contact-email'
           value={email}
           placeholder='email'
+          type='email'
           onChangeParent={(values: Iform) => onHandleParentInput(values)}
         />
         <TextAreaForm

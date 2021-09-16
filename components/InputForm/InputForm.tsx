@@ -13,9 +13,10 @@ interface IinputForm {
   value: string;
   placeholder: string;
   onChangeParent: (value: Iform) => void;
+  type?: string;
 }
 
-export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder, onChangeParent}) => {
+export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder, onChangeParent, type = 'text'}) => {
   const [inputClass, setInputClass] = useState('input input-bordered');
   const [ errorMessage, setErrorMessage] = useState({ name: '', message: '' });
 
@@ -48,7 +49,7 @@ export const InputForm: FC<IinputForm> = ({ id, label, name, value, placeholder,
           <span className="label-text">{name} :</span>
         </label>
         <div className="flex flex-col w-2/3 self-end">
-          <input value={value} onChange={onHandleInput} type="text" id={id} name={name} placeholder={placeholder} className={inputClass} />
+          <input value={value} onChange={onHandleInput} type={type} id={id} name={name} placeholder={placeholder} className={inputClass} required />
           { errorMessage.name && errorMessage.message && <ErrorForm message={errorMessage.message} />}
         </div>
       </div>
