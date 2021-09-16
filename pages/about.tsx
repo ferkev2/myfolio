@@ -11,13 +11,13 @@ const About: NextPage = () => {
       </Head>
       <main>
         <div className="grid">
-          <h1 className="text-6xl text-center mt-8">About</h1>
+          <h1 className="text-4xl sm:text-6xl md:text-4xl lg:text-6xl text-center mt-8 mb-10">About</h1>
           <div className="flex justify-center items-center">
             <figure className="p-2">
               <Image src="https://picsum.photos/id/1005/400/250" alt="photo-about" height="250" width="400" />
             </figure>
           </div>
-          <div className="flex flex-col	justify-center w-3/4 place-self-center">
+          <div className="flex flex-col	justify-center w-3/4 place-self-center mt-10">
             <p className="p-2 mb-4">
               I made a professionnal reconversion in web an especially as a web developer. I like javascript a lot and I decided to learn nodeJs technologies.<br />
               I learned react and angular in project. But I have bought course to speed up my self formation.
@@ -41,10 +41,10 @@ const About: NextPage = () => {
             <p className="p-2">
               I used to work on macos or windows but prefer to have linux or macos environnement for working.
             </p>
-            <h2 className="p-2 text-center mt-4 mb-4 text-4xl">My technical Stack</h2>
-            <ul className="p-2 mb-6 flex flex-nowrap justify-center">
+            <h2 className="p-2 text-center mt-10 mb-4 text-4xl">My technical Stack</h2>
+            <ul className="p-2 mb-32 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center w-full">
               <li className="m-2">
-                <Image alt="react-logo" src="/assets/stack/react.png" width="150" height="150" />
+                <Image alt="react-logo" src="/assets/stack/react.png" width={150} height={150} />
               </li>
               <li className="m-2">
                 <Image alt="nodejs-logo" src="/assets/stack/node-js-logo.png" width="150" height="150" />

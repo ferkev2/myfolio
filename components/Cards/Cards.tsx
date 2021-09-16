@@ -11,11 +11,9 @@ interface Iproject {
 
 export const  Cards: FC<Iproject> = ({ id, company, description, stack, urlImage }) => {
   return (
-      <li className="w-4/5 self-center">
+      <li className="self-center align-center justify-center w-4/5 md:7/12 lg:7/12 mt-8">
         <div className="card bordered shadow-lg">
-          <figure>
-            { urlImage ? <Image alt="photo" src={urlImage} className="w-full" width="200" height="300"/> : <Image alt="photo" src="/assets/projects/nophoto.png" className="w-full" width="200" height="300"/>}
-          </figure>
+          { urlImage ? <Image alt="photo" src={urlImage} className="w-full" width={150} height={200} /> : <Image alt="photo" src="/assets/projects/nophoto.jpeg" className="w-full" width={200} height={200} />}
           <div className="card-body">
             <h2 className="card-title">{ company }</h2>
             <p>{ description }</p>

@@ -13,10 +13,10 @@
     },
     {
       "id": 2,
-      "company": "Malakoff Mederic",
-      "description": "Work on front website for Arkea services",
-      "urlImage": null,
-      "stack": ["symfony", "nodejs", "angular", "git"]
+      "company": "MyTF1",
+      "description": "Work on the TF1 app on miami box",
+      "urlImage": "/assets/projects/tf1.png",
+      "stack": ["qt", "javascript", "git", "docker"]
     },
     {
       "id": 3,
@@ -27,17 +27,17 @@
     },
     {
       "id": 4,
+      "company": "Malakoff Mederic",
+      "description": "Work on front website for Arkea services",
+      "urlImage": null,
+      "stack": ["symfony", "nodejs", "angular", "git"]
+    },
+    {
+      "id": 5,
       "company": "Société Générale",
       "description": "Creation of web apps for central services",
       "urlImage": null,
       "stack": ["nestjs", "react", "typescript", "docker"]
-    },
-    {
-      "id": 5,
-      "company": "MyTF1",
-      "description": "Work on the TF1 app on miami box",
-      "urlImage": "/assets/projects/tf1.png",
-      "stack": ["qt", "javascript", "git"]
     }
   ]
 }
