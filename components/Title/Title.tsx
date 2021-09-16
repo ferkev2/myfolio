@@ -1,15 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
-import Styles from './Title.module.css';
+
 export const Title = () => {
   return (
     <>
       <div className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white flex flex-col p-6">
         <div className="avatar items-center justify-center">
-          <div className="mb-8 mr-2 w-40 mask mask-hexagon">
-            <Image alt="photo" src="/assets/icons/myHead.png" width="400" height="500"/>
+          <div className="p-6">
+            <div className="w-40 mask mask-hexagon">
+              <Image alt="photo" src="/assets/icons/myHead.png" width="400" height="500"/>
+            </div>
           </div>
-          <div>
+          <div className="self-center">
             <h1 className="text-6xl">Hello I&rsquo;m a JS developer</h1>
             <p>JS fullstack developer React / Nodejs based in France</p>
           </div>

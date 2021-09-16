@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-
-interface IcontactForm {
-  firstname: string;
-  lastname: string;
-  email: string;
-  message: string;
+import React, { useState, useRef, SyntheticEvent } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import axios from 'axios';
+import { InputForm } from '../InputForm/InputForm';
+import { TextAreaForm } from '../TextAreaForm/TextAreaForm';
+interface Iform {
+  name: string;
+  value: string;
 }
 
 export const ContactForm = () => {
@@ -12,11 +13,11 @@ export const ContactForm = () => {
   const [ lastname, setLastname] = useState<string>('');
   const [ email, setEmail ] = useState<string>('');
   const [ message, setMessage ] = useState<string>('');
+  const [ captcha, setCaptcha ] = useState<string|null|undefined>('');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  const onHandleInput = (e: any) => {
-
-    const { name, value }  = e.target;
-
+  const onHandleParentInput = (values: Iform) => {
+    const { name, value }  = values;
     switch (name) {
       case 'firstname':
         setFirstname(value);
@@ -33,47 +34,80 @@ export const ContactForm = () => {
     };
   };
 
-  const onHandleSubmit = (e: any) => {
+  const onHandleCaptcha = async () => {
+    try {
+      const token: string | null | undefined = await recaptchaRef?.current?.getValue();
+      if (token) {
+        setCaptcha(token);
+      }
+    } catch (err) {
+      console.error(message);
+    }
+  };
+
+  const onHandleSubmit = () => {
     const messageToSend = {
       firstname,
       lastname,
       email,
       message,
+      captcha
     };
-    console.log(messageToSend);
+
+
+    if (captcha && firstname && lastname && email) {
+      axios.post('/api/contact', messageToSend).then((response) => {
+        console.log(response);
+      });
+    }
   };
 
 
   return (
     <>
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={onHandleSubmit}>
-        <div className="form-control">
-          <label className="label" htmlFor="contact-firstname">
-            <span className="label-text">Firstname :</span>
-          </label>
-          <input value={firstname} onChange={onHandleInput} type="text" id="contact-firstname" name="firstname" placeholder="firstname" className="input input-bordered" />
-        </div>
-        <div className="form-control">
-          <label className="label" htmlFor="contact-lastname">
-            <span className="label-text">Lastname :</span>
-          </label>
-          <input value={lastname} onChange={onHandleInput} id="contact-firstname" name="lastname" type="text" placeholder="Lastname" className="input input-bordered" />
-        </div>
-        <div>
-          <label className="label" htmlFor="contact-email">
-            <span className="label-text">Email :</span>
-          </label>
-          <input value={email} onChange={onHandleInput} id="contact-email" name="email" type="text" placeholder="email" className="input input-bordered" />
-        </div>
-        <div className="form-control">
-          <label className="label" htmlFor="contact-message">
-            <span className="label-text">Your Message</span>
-          </label>
-          <textarea value={message} onChange={onHandleInput} id="contact-message" name="message" className="textarea h-24 textarea-bordered" placeholder="Your message"></textarea>
-        </div>
-        <div>
+      <form className="mt-8 bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={onHandleSubmit}>
+        <InputForm
+          label='contact-firstname'
+          id='contact-firstname'
+          name='firstname'
+          value={firstname}
+          placeholder='firstname'
+          onChangeParent={(values: Iform) => onHandleParentInput(values)}
+        />
+        <InputForm
+          label='contact-lastname'
+          id='contact-lastname'
+          name='lastname'
+          value={lastname}
+          placeholder='lastname'
+          onChangeParent={(values: Iform) => onHandleParentInput(values)}
+        />
+        <InputForm
+          label='contact-email'
+          name='email'
+          id='contact-email'
+          value={email}
+          placeholder='email'
+          onChangeParent={(values: Iform) => onHandleParentInput(values)}
+        />
+        <TextAreaForm
+          label='contact-message'
+          name='message'
+          id='contact-message'
+          value={message}
+          placeholder='Your message'
+          onChangeParent={(values: Iform) => onHandleParentInput(values)}
+        />
+        <div className="text-center">
           <button type="reset" className="btn">Annuler</button>
-          <button className="btn">Valider</button>
+          <button className="btn ml-2">Valider</button>
+        </div>
+        <div className="flex justify-center mt-6">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey='6Lez8WscAAAAAFhB656_Zxta1Q-WpTbyCZC7vi2q'
+            onChange={onHandleCaptcha}
+          />
         </div>
       </form>
     </>
