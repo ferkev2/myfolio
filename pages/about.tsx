@@ -9,7 +9,7 @@ const About: NextPage = () => {
       <Head>
         <title>About</title>
       </Head>
-      <main>
+      <main data-theme="light">
         <div className="grid">
           <h1 className="text-4xl sm:text-6xl md:text-4xl lg:text-6xl text-center mt-8 mb-10">About</h1>
           <div className="flex justify-center items-center">
