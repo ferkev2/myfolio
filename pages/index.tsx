@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <div>
           <Title />
         </div>
-        <div className="mt-20">
+        <div className="mt-20" data-theme="light">
           <div className="transform -skew-y-2 bg-primary h-32 ml-auto mr-auto flex justify-center items-center content-center">
             <h2 className="transform skew-y-2 text-2xl overflow-hidden text-center self-center text-white">
               My professionnal projects

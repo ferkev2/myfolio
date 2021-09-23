@@ -87,9 +87,9 @@ export const ContactForm = () => {
 
   return (
     <>
-      {alertValue.type !== '' ? (
-        <Alert alertMessage={alertValue.message} alertType={alertValue.type} />
-      ) : null}
+      { alertValue.type !== '' ? (
+          <Alert alertMessage={alertValue.message} alertType={alertValue.type} />
+        ) : null}
       <form
         className="mt-8 bg-white rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={onHandleSubmit}
