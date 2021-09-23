@@ -16,17 +16,17 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main data-theme="light">
+      <main>
         <div>
           <Title />
         </div>
-        <div className="mt-20">
+        <div className="mt-20" data-theme="light">
           <div className="transform -skew-y-2 bg-primary h-32 ml-auto mr-auto flex justify-center items-center content-center">
             <h2 className="transform skew-y-2 text-2xl overflow-hidden text-center self-center text-white">
               My professionnal projects
             </h2>
           </div>
-          <ul className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center mt-12">
+          <ul className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 justify-items-center mt-12" data-theme="light">
             {data.experiences.map((experience: any) => {
               return <Cards key={experience.id} {...experience} />;
             })}
