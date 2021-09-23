@@ -13,6 +13,7 @@ module.exports = {
   },
   daisyui: {
     styled: true,
+    themes: false,
     rtl: false,
   },
 };
